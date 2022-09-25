@@ -1,9 +1,67 @@
+:root {
+    --clr-primary: #4fbebe;
+    --clr-accent: #ab11cc;
+    --clr-white: #ffffff;
+    --clr-black: #4444;
+
+    --font-family: 'Roboto', sans-serif;
+
+    --font-size-h1: 1.25rem;
+    --font-size-xs: 0.8125rem;
+    --font-size-sm: 0.9375rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+
+    --font-weight-300: 300;
+    --font-weight-400: 400;
+    --font-weight-500: 500;
+    --font-weight-700: 700:
+}
+
+
+/* ==============================RESETS============================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
 * {
     margin: 0;
     padding: 0;
-    border: none;
-    box-sizing: border-box;
-    text-decoration: none;
+    font: inherit;
+    font-family: var(--font-family);
+}
+
+ul[role='list'],
+ol[role='list'] {
     list-style: none;
 }
 
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 1.5;
+}
+
+a {
+    text-decoration-skip: auto;
+}
+
+img,
+picture,
+svg {
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+/* __________________________RESETS_________________________________ */
