@@ -1,16 +1,18 @@
 :root {
     --clr-primary: #4fbebe;
+    --clr-secondary: #394555;
     --clr-accent: #ab11cc;
     --clr-white: #ffffff;
     --clr-black: #4444;
 
     --font-family: 'Roboto', sans-serif;
 
-    --font-size-h1: 1.25rem;
-    --font-size-xs: 0.8125rem;
-    --font-size-sm: 0.9375rem;
-    --font-size-md: 1rem;
-    --font-size-lg: 1.125rem;
+    --font-size-xs: 14px;
+    --font-size-sm: 16px;
+    --font-size-rg: 18px;
+    --font-size-md: 25px;
+    --font-size-lg: 30px;
+    --font-size-xl: 40px
 
     --font-weight-300: 300;
     --font-weight-400: 400;
@@ -48,8 +50,15 @@ body {
     line-height: 1.5;
 }
 
+h1 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-500);
+}
 a {
-    text-decoration-skip: auto;
+    text-decoration: none;
+}
+li {
+    list-style: none;
 }
 
 img,
@@ -65,3 +74,489 @@ select {
     font: inherit;
 }
 /* __________________________RESETS_________________________________ */
+
+
+/* =================================================================
+                            Navigation
+==================================================================== */
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 2px solid lightgrey;
+}
+
+.logo-wrapper {
+    flex: 1;
+}
+
+.links-wrapper {
+    display: flex;
+    flex: 1;
+    color: var(--clr-accent);
+    min-width: 310px;
+}
+
+.links-wrapper ul, a {
+    display: flex;
+    color: var(--clr-accent);
+    gap: 30px;
+    font-weight: var(--font-weight-500);
+    font-size: var(--font-size-rg);
+}
+
+select {
+    border: none;
+    /* -webkit-appearance: none; */
+    color: var(--clr-accent);
+    cursor: pointer;
+}
+
+.search-wrapper {
+    display: flex;
+    justify-content: start;
+    min-width: 300px;
+}
+
+.search-wrapper > input {
+    border: 3px solid var(--clr-primary);
+    border-radius: 5px 0 0px 5px;
+    padding: 0 8px;
+}
+
+.search-wrapper > div {
+    padding: 5px 8px;
+    background-color: var(--clr-white);
+    border: 3px solid var(--clr-primary);
+    border-radius: 0 5px 5px 0;
+    margin-left: -15px;
+    border-left: 0;
+    cursor: pointer;
+}
+
+.fa-sharp {                     /* magnifying icon || search icon */
+    color: var(--clr-primary);
+    cursor: pointer;
+}
+
+.menu-container {
+    display: none;
+}
+
+/* =================================================================
+                    Responsive menu setup
+==================================================================== */
+
+@media (max-width: 800px) {
+    .links-wrapper {
+        display: none;
+    }
+
+    .logo-wrapper {
+        flex: 0;
+    }
+
+    .search-wrapper {
+        margin: auto;
+    }
+
+    .menu-container {
+        display: block;
+        position: absolute;
+        inset: 15px 30px auto auto;
+    }
+    /* puts the checkbox above the hamburger div with the checkbox being transparent */
+    .toggler {
+        position: absolute;
+        inset: 0 0 auto auto;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        opacity: 0;
+        z-index: 2; /* puts the class above the hamburger-wrapper class*/
+    }
+
+    .hamburger-wrapper {
+        position: absolute;
+        inset: 0 0 auto auto;
+        z-index: 1; /* puts the div above the menu class div*/
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ====================Hamburger Icon=========================== */
+
+    .hamburger-wrapper > div {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--clr-primary);
+        width: 100%;
+        height: 4px;
+        border-radius: 1px;
+        transition: all 0.6s ease;
+    }
+
+    .hamburger-wrapper > div::before,
+    .hamburger-wrapper > div::after {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: -10px;
+        width: 100%;
+        height: 4px;
+        background: var(--clr-primary);
+        border-radius: 1px;
+    }
+    
+    .hamburger-wrapper > div::after {
+        top: 10px;
+    }
+    
+    /* hamburger shake on hover */
+    .toggler:hover:not(.toggler:checked) + .hamburger-wrapper > div {
+        animation: shake 0.5s 1;
+    }
+    
+    @keyframes shake {
+        0% { transform: translateY(0) }
+        25% { transform: translateY(1px) }
+        50% { transform: translateY(-1px) }
+        75% { transform: translateY(1px) }
+        100% { transform: translateY(0) }
+    }
+
+    /* checkbox animation */
+    .toggler:checked + .hamburger-wrapper > div {
+        rotate: 135deg;
+    }
+
+    /* turn lines into X */
+    .toggler:checked + .hamburger-wrapper > div:before,
+    .toggler:checked + .hamburger-wrapper > div:after {
+        top: 0;
+        rotate: 90deg;
+    }
+
+    /* make X rotate on hover */
+    .toggler:checked:hover + .hamburger-wrapper > div{
+        rotate: 225deg;
+    }
+
+    .menu {
+        position:absolute;
+        inset: 0px 0 auto auto;
+        width: 90vw;
+        height: 40vh;
+        padding-left: 20px;
+        background-color: var(--clr-secondary);
+        opacity: 0.9;
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: scale(0, 0);
+        transition: transform 0.15s ease-in;
+    }
+
+    .menu li + li {
+        margin-top: 25px;
+    }
+
+    .menu a {
+        font-size: var(--font-size-rg);
+        color: var(--clr-primary);
+        font-weight: 500;
+    }
+
+    .menu select {
+        background-color: var(--clr-secondary);
+        font-size: var(--font-size-rg);
+        color: var(--clr-primary);
+        font-weight: 500;
+    }
+
+    /* =========To show the menu */
+
+    .toggler:checked ~ .menu {
+        transform: scale(1, 1);
+    }
+}   
+
+/* =======================Feedback Button=========================== */
+
+.feedback-container {
+    position: fixed;
+    inset: auto 0 0 auto;
+    background-color: var(--clr-accent);
+    padding: 5px 10px;
+    clip-path: polygon(10% 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 0 30%);
+    z-index: 1;
+
+}
+
+.feedback-container > a {
+    color: var(--clr-white);
+}
+
+/* ================================================================
+                                Top Bar
+=================================================================== */
+
+.top-bar-container {
+    display: flex;
+    align-items: center;
+    min-height: 120px;
+    flex-wrap: wrap;
+}
+
+.left-wrapper {
+    flex: 1;
+    color: var(--clr-primary);
+    padding-left: 70px;
+}
+
+.left-wrapper h1 {
+    font-size: var(--font-size-lg);
+}
+
+.right-wrapper {
+    display: flex;
+    min-width: 300px;
+    align-items: center;
+    gap: 20px;
+}
+
+.right-wrapper button:first-of-type {
+    color: var(--clr-primary);
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-500);
+    background-color: var(--clr-white);
+    padding: 8px 30px;
+    border: 1px solid var(--clr-primary);
+    border-radius: 6px;
+}
+
+.right-wrapper button:nth-of-type(2) {
+    color: var(--clr-white);
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-500);
+    background-color: var(--clr-primary);
+    padding: 8px 20px;
+    border: 1px solid var(--clr-primary);
+    border-radius: 6px;
+}
+
+/* =================================================================
+                        Register Section
+==================================================================== */
+
+.join-the-family {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.register-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0px 150px;
+    border-top: 2px solid lightgrey;
+    border-bottom: 2px solid lightgrey;
+    max-width: 600px;
+    min-height: 400px;
+}
+
+.register-wrapper h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-700);
+    margin-bottom: 20px;
+}
+
+.register-wrapper p {
+    line-height: 1.6;
+}
+
+.register-wrapper button {
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-700);
+    color: var(--clr-white);
+    background-color: var(--clr-accent);
+    padding: 8px 55px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 25px;
+}
+
+.image-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 600px;
+    max-height: 490px;
+    border-block: 0.8px solid lightgrey;
+}
+
+.register-image {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+.img-gradient {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0 0 auto auto;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 10%, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* =================================================================
+                        Text Bubble Section
+==================================================================== */
+.spec {
+    margin: 55px 0 0 70px;
+    color: var(--clr-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-700);
+}
+
+
+.bubble-section-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    padding: 0 80px;
+    margin-top: 30px;
+}
+
+.text-bubble {
+    flex: 1;
+    min-width: 295px;
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    min-height: 250px;
+    padding: 18px;
+}
+
+.text-bubble p {
+    text-align: center;
+}
+
+/* ================================================================
+                        Start of Carousel
+================================================================== */
+
+.carousel-section-container {
+    margin-top: 90px;
+    padding: 0 30px; 
+}
+
+.carousel-section-container h2 {
+    text-align: center;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-700);
+}
+
+.carousel-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 21%;
+    gap: 25px;
+    padding: 20px 0;
+    margin-top: 25px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain; /* this ensures that at the end of the scroll, the element doesn't scroll the rest of the page. Morre useful on vertical scrolls */
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 15px;
+}
+
+
+::-webkit-scrollbar{
+    height: 10px;
+    width: 12px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: var(--clr-black);
+    margin: 4px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: var(--clr-primary);
+    border: 2.5px solid var(--clr-black);
+    border-radius: 4px;
+}
+
+.slide-icons {
+    width: 10px;
+}
+
+.news {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 300px;
+    scroll-snap-align: start;
+}
+
+.news > img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* ==============================================================
+                        Start of the footer
+=================================================================== */
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--clr-secondary);
+    margin-top: 80px;
+    padding: 0 80px;
+    min-height: 500px;
+}
+
+.footer-container a {
+    color: var(--clr-white);
+}
+
+.socials-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: var(--clr-accent);
+    gap: 50px;
+}
+
+.twitter-div,
+.facebook-div,
+.instagram-div,
+.linkedin-div {
+    display: flex;
+    gap: 15px;
+}
+
+.navi-links-wrapper {
+    margin-left: auto;
+    color: var(--clr-accent);
+    letter-spacing: 1.8px;
+}
+
+.navi-links-wrapper a + a{
+    margin-top: 30px;
+}
