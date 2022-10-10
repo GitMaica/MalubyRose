@@ -1,7 +1,7 @@
 :root {
     --clr-primary: #4fbebe;
     --clr-secondary: #394555;
-    --clr-accent: #ab11cc;
+    --clr-accent: #394555;
     --clr-white: #ffffff;
     --clr-black: #4444;
 
@@ -48,6 +48,8 @@ html:focus-within {
 
 body {
     line-height: 1.5;
+    /* width: clamp(800px, 100vw, 1510px); */
+    margin-inline: auto;
 }
 
 h1 {
@@ -89,18 +91,19 @@ select {
 
 .logo-wrapper {
     flex: 1;
+    min-width: 80px
 }
 
 .links-wrapper {
     display: flex;
     flex: 1;
-    color: var(--clr-accent);
+    color: var(--clr-secondary);
     min-width: 310px;
 }
 
 .links-wrapper ul, a {
     display: flex;
-    color: var(--clr-accent);
+    color: var(--clr-secondary);
     gap: 30px;
     font-weight: var(--font-weight-500);
     font-size: var(--font-size-rg);
@@ -113,10 +116,19 @@ select {
     cursor: pointer;
 }
 
+select:focus {
+    outline: none;
+}
+
+select > option {
+    background-color: var(--clr-secondary);
+}
+
 .search-wrapper {
     display: flex;
-    justify-content: start;
+    flex: 0.5;
     min-width: 300px;
+    justify-content: center;
 }
 
 .search-wrapper > input {
@@ -148,7 +160,7 @@ select {
                     Responsive menu setup
 ==================================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .links-wrapper {
         display: none;
     }
@@ -262,8 +274,9 @@ select {
         display: flex;
         align-items: center;
         justify-content: center;
-        transform: scale(0, 0);
-        transition: transform 0.15s ease-in;
+        /* transform: scale(0, 0); */
+        display: none;
+        transition: all 0.15s ease-in-out;
     }
 
     .menu li + li {
@@ -286,7 +299,8 @@ select {
     /* =========To show the menu */
 
     .toggler:checked ~ .menu {
-        transform: scale(1, 1);
+        /* transform: scale(1, 1); */
+        display: flex;
     }
 }   
 
@@ -295,7 +309,7 @@ select {
 .feedback-container {
     position: fixed;
     inset: auto 0 0 auto;
-    background-color: var(--clr-accent);
+    background-color: black;
     padding: 5px 10px;
     clip-path: polygon(10% 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 0 30%);
     z-index: 1;
@@ -361,6 +375,7 @@ select {
 .join-the-family {
     display: flex;
     flex-wrap: wrap;
+    border-block: 0.8px solid lightgrey;
 }
 
 .register-wrapper {
@@ -370,8 +385,7 @@ select {
     justify-content: center;
     text-align: center;
     padding: 0px 150px;
-    border-top: 2px solid lightgrey;
-    border-bottom: 2px solid lightgrey;
+    margin-inline: auto;
     max-width: 600px;
     min-height: 400px;
 }
@@ -383,6 +397,7 @@ select {
 }
 
 .register-wrapper p {
+    font-size: var(--font-size-sm);
     line-height: 1.6;
 }
 
@@ -390,7 +405,7 @@ select {
     font-size: var(--font-size-rg);
     font-weight: var(--font-weight-700);
     color: var(--clr-white);
-    background-color: var(--clr-accent);
+    background-color: var(--clr-primary);
     padding: 8px 55px;
     border: none;
     border-radius: 6px;
@@ -402,7 +417,6 @@ select {
     flex: 1;
     min-width: 600px;
     max-height: 490px;
-    border-block: 0.8px solid lightgrey;
 }
 
 .register-image {
@@ -422,6 +436,11 @@ select {
 /* =================================================================
                         Text Bubble Section
 ==================================================================== */
+
+/* .specialties-container {
+    padding: 0 80px;
+} */
+
 .spec {
     margin: 55px 0 0 70px;
     color: var(--clr-primary);
@@ -437,19 +456,29 @@ select {
     gap: 30px;
     padding: 0 80px;
     margin-top: 30px;
+    /* margin-inline: auto; */
 }
 
 .text-bubble {
     flex: 1;
-    min-width: 295px;
+    flex-grow: 0;
+    min-width: 270px;
     background-color: #f2f2f2;
     border-radius: 15px;
-    min-height: 250px;
+    height: 270px;
     padding: 18px;
+    text-align: center;
+}
+
+.text-bubble h2 {
+    text-decoration: underline;
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-700);
+    margin-bottom: 8px;
 }
 
 .text-bubble p {
-    text-align: center;
+    line-height: 1.4;
 }
 
 /* ================================================================
@@ -499,15 +528,18 @@ select {
     border-radius: 4px;
 }
 
-.slide-icons {
+/* .slide-icons {
     width: 10px;
-}
+} */
 
 .news {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    background-color: var(--clr-secondary);
+    border-radius: 6px;
+    padding: 8px;
     text-align: center;
     min-height: 300px;
     scroll-snap-align: start;
@@ -516,7 +548,25 @@ select {
 .news > img {
     width: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    /* object-fit: cover; */
+}
+
+.news h3 {
+    margin-block: 15px;
+    color: var(--clr-white);
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-700);
+}
+
+.news p {
+    color: var(--clr-white);
+    font-size: var(--font-size-sm);
+    text-align: left;
+}
+
+.news span {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 /* ==============================================================
