@@ -12,7 +12,7 @@
     --font-size-rg: 18px;
     --font-size-md: 25px;
     --font-size-lg: 30px;
-    --font-size-xl: 40px
+    --font-size-xl: 50px;
 
     --font-weight-300: 300;
     --font-weight-400: 400;
@@ -610,3 +610,59 @@ select > option {
 .navi-links-wrapper a + a{
     margin-top: 30px;
 }
+
+/* ____________________________________________________________ */
+
+.contact {
+    color: var(--clr-primary);
+}
+
+.contact:hover {
+    color: var(--clr-secondary);
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 80px;
+}
+
+.image-wrapper h1 {
+    position: absolute;
+    inset: 80% 0 0 50%;
+    transform: translateX(-20%);
+    font-size: var(--font-size-xl);
+    letter-spacing: 4px;
+    color: var(--clr-white);
+}
+
+.contact-us-image-container img {
+    object-fit: cover;
+    object-position: 0 -250px;
+    width: 100%;
+    height: 100%;
+}
+
+.contact-info-container {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 100px;
+}
+
+.address-wrapper p {
+    color: var(--clr-secondary);
+    font-size: var(--font-size-lg);
+    margin-top: 15px;
+}
+
+.numbers-wrapper li p {
+    color: var(--clr-secondary);
+    font-size: var(--font-size-md);
+    margin-top: 10px;
+}
+
+.contact-list {
+    list-style: disc;
+}
+
