@@ -1,9 +1,9 @@
 :root {
-    --clr-primary: #4fbebe;
+    --clr-primary: #0642ff;
     --clr-secondary: #394555;
-    --clr-accent: #394555;
+    --clr-accent: #4688ff;
     --clr-white: #ffffff;
-    --clr-black: #4444;
+    --clr-black: #000;
 
     --font-family: 'Roboto', sans-serif;
 
@@ -77,6 +77,53 @@ select {
 }
 /* __________________________RESETS_________________________________ */
 
+/* ===========================================================
+                        Scroll bar
+                      only in chrome
+=================================================================*/
+
+::-webkit-scrollbar{
+    height: 6px;
+    width: 12px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: var(--clr-secondary);
+    margin: 4px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 8px;
+    background-color: var(--clr-accent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--clr-primary);
+}
+
+::-webkit-scrollbar-button {
+    width: 10px;
+    height: 20px;
+    background-color: var(--clr-white);
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid var(--clr-accent);
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid var(--clr-accent);
+}
+
+/* .slide-icons {
+    width: 10px;
+} */
 
 /* =================================================================
                             Navigation
@@ -85,13 +132,28 @@ select {
 .nav-container {
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    padding: 6px 20px;
     border-bottom: 2px solid lightgrey;
 }
 
 .logo-wrapper {
     flex: 1;
     min-width: 80px
+}
+
+.logo {
+    position: relative;
+    width: 180px;
+    height: 70px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 0;
+    overflow: auto;
+    z-index: 2;
 }
 
 .links-wrapper {
@@ -109,19 +171,28 @@ select {
     font-size: var(--font-size-rg);
 }
 
+.links-wrapper ul, a:hover {
+    color: var(--clr-accent);
+}
+
 select {
     border: none;
     /* -webkit-appearance: none; */
-    color: var(--clr-accent);
+    color: var(--clr-secondary);
     cursor: pointer;
 }
 
-select:focus {
+select:focus:hover {
     outline: none;
+    color: var(--clr-accent);
 }
 
 select > option {
     background-color: var(--clr-secondary);
+}
+
+select > option:hover:focus {
+    color: var(--clr-accent);
 }
 
 .search-wrapper {
@@ -135,6 +206,11 @@ select > option {
     border: 3px solid var(--clr-primary);
     border-radius: 5px 0 0px 5px;
     padding: 0 8px;
+}
+
+input:focus:focus-visible:focus-within:active {
+    color: var(--clr-accent);
+    outline: none;
 }
 
 .search-wrapper > div {
@@ -304,25 +380,27 @@ select > option {
     }
 }   
 
-/* =======================Feedback Button=========================== */
+/* ====================Feedback Button======================== */
 
 .feedback-container {
     position: fixed;
     inset: auto 0 0 auto;
-    background-color: black;
+    background-color: var(--clr-black);
     padding: 5px 10px;
     clip-path: polygon(10% 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 0 30%);
     z-index: 1;
-
 }
 
 .feedback-container > a {
     color: var(--clr-white);
+    cursor: pointer;
 }
 
-/* ================================================================
+/* ====================================================================
+
                                 Top Bar
-=================================================================== */
+
+===================================================================== */
 
 .top-bar-container {
     display: flex;
@@ -509,29 +587,6 @@ select > option {
     scroll-padding-inline: 15px;
 }
 
-
-::-webkit-scrollbar{
-    height: 10px;
-    width: 12px;
-}
-
-::-webkit-scrollbar-track-piece {
-    background-color: var(--clr-black);
-    margin: 4px;
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-    width: 10px;
-    background-color: var(--clr-primary);
-    border: 2.5px solid var(--clr-black);
-    border-radius: 4px;
-}
-
-/* .slide-icons {
-    width: 10px;
-} */
-
 .news {
     display: flex;
     flex-direction: column;
@@ -611,21 +666,36 @@ select > option {
     margin-top: 30px;
 }
 
-/* ____________________________________________________________ */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+                        Contact US Page
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 .contact {
     color: var(--clr-primary);
 }
 
 .contact:hover {
-    color: var(--clr-secondary);
+    color: var(--clr-accent);
 }
+
+.contact-us-image-container {
+    margin-bottom: 60px;
+}
+
+.contact-us-image-container img {
+    object-fit: cover;
+    object-position: 0 -250px;
+    width: 100%;
+    height: 100%;
+}
+
 
 .image-wrapper {
     position: relative;
     width: 100%;
     height: 500px;
-    margin-bottom: 80px;
 }
 
 .image-wrapper h1 {
@@ -637,17 +707,19 @@ select > option {
     color: var(--clr-white);
 }
 
-.contact-us-image-container img {
-    object-fit: cover;
-    object-position: 0 -250px;
-    width: 100%;
-    height: 100%;
-}
 
 .contact-info-container {
     display: flex;
     justify-content: space-between;
     padding-inline: 100px;
+}
+
+.address {
+    max-width: 350px;
+}
+
+.numbers-wrapper {
+    margin-inline: auto;
 }
 
 .address-wrapper p {
@@ -664,5 +736,16 @@ select > option {
 
 .contact-list {
     list-style: disc;
+}
+
+.number {
+    font-size: var(--font-size-rg);
+    padding-bottom: 15px;
+}
+
+.main-info p {
+    padding-left: 100px;
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-700);
 }
 
