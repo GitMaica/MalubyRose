@@ -1,7 +1,9 @@
 :root {
-    --clr-primary: #0642ff;
-    --clr-secondary: #394555;
-    --clr-accent: #4688ff;
+    --clr-primary: #2356fd; /* This color was chosen to be my primarary color because it represents credibility, trust, knownledge, power, professionalism, cleanliness, calm and focus. */
+
+    --clr-secondary: #394555; /* A darker shaded blue close to black. This color was used for contrast */
+
+    --clr-accent: #4688ff; /* A shade to my --clr-primary that was chosen for the same reasons stated above. */
     --clr-white: #ffffff;
     --clr-grey: #f1f1f1;
     --clr-black: #000;
@@ -16,7 +18,6 @@
     --font-size-xl: 50px;
     --font-size-sp: 80px;
 
-    --font-weight-300: 300;
     --font-weight-400: 400;
     --font-weight-500: 500;
     --font-weight-700: 700;
@@ -91,7 +92,7 @@ select {
 }
 
 ::-webkit-scrollbar-track-piece {
-    background-color: var(--clr-secondary);
+    background-color: var(--clr-grey);
     margin: 4px;
     border-radius: 5px;
 }
@@ -148,15 +149,15 @@ select {
     position: relative;
     width: 180px;
     height: 70px;
+    z-index: 2;
 }
 
-.logo img {
+.logo > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: 0 0;
     overflow: auto;
-    z-index: 2;
 }
 
 .links-wrapper {
@@ -166,15 +167,18 @@ select {
     min-width: 310px;
 }
 
-.links-wrapper ul, a {
+.links-wrapper > ul {
     display: flex;
-    color: var(--clr-secondary);
     gap: 30px;
+}
+
+.nav-links {
+    color: var(--clr-secondary);
     font-weight: var(--font-weight-500);
     font-size: var(--font-size-rg);
 }
 
-.links-wrapper ul, a:hover {
+.nav-links:hover {
     color: var(--clr-accent);
 }
 
@@ -206,9 +210,18 @@ select > option:hover:focus {
 }
 
 .search-wrapper > input {
-    border: 3px solid var(--clr-primary);
+    border: 2px solid var(--clr-primary);
     border-radius: 5px 0 0px 5px;
     padding: 0 8px;
+}
+
+.search-wrapper > input:hover {
+    border: 3px solid var(--clr-accent);
+}
+
+.search-wrapper > input:hover::placeholder {
+    color:  var(--clr-accent);
+    
 }
 
 input:focus:focus-visible:focus-within:active {
@@ -219,11 +232,16 @@ input:focus:focus-visible:focus-within:active {
 .search-wrapper > div {
     padding: 5px 8px;
     background-color: var(--clr-white);
-    border: 3px solid var(--clr-primary);
+    border: 2px solid var(--clr-primary);
     border-radius: 0 5px 5px 0;
     margin-left: -15px;
     border-left: 0;
     cursor: pointer;
+}
+
+.search-wrapper > input:hover + div {
+    border: 3px solid var(--clr-accent);
+    border-left: none;
 }
 
 .fa-sharp {                     /* magnifying icon || search icon */
@@ -265,13 +283,13 @@ input:focus:focus-visible:focus-within:active {
         width: 40px;
         height: 40px;
         opacity: 0;
-        z-index: 2; /* puts the class above the hamburger-wrapper class*/
+        z-index: 4; /* puts the class above the hamburger-wrapper class*/
     }
 
     .hamburger-wrapper {
         position: absolute;
         inset: 0 0 auto auto;
-        z-index: 1; /* puts the div above the menu class div*/
+        z-index: 3; /* puts the div above the menu class div*/
         width: 40px;
         height: 40px;
         padding: 5px;
@@ -356,22 +374,30 @@ input:focus:focus-visible:focus-within:active {
         /* transform: scale(0, 0); */
         display: none;
         transition: all 0.15s ease-in-out;
+        z-index: 2;
     }
 
     .menu li + li {
         margin-top: 25px;
     }
 
-    .menu a {
+    .menu > div > ul > li > a {
         font-size: var(--font-size-rg);
-        color: var(--clr-primary);
+        color: var(--clr-white);
         font-weight: 500;
     }
+    
+    .menu > div > ul > li > a:hover {
+        color: var(--clr-accent);
+    }
 
-    .menu select {
+    .menu > div > ul > li > a > select:hover {
+        color: var(--clr-accent);
+    }
+    .menu > div > ul > li > a > select {
         background-color: var(--clr-secondary);
         font-size: var(--font-size-rg);
-        color: var(--clr-primary);
+        color: var(--clr-white);
         font-weight: 500;
     }
 
@@ -385,7 +411,7 @@ input:focus:focus-visible:focus-within:active {
 
 /* ====================Feedback Button======================== */
 
-.feedback-container {
+/* .feedback-container {
     position: fixed;
     inset: auto 0 0 auto;
     background-color: var(--clr-black);
@@ -397,7 +423,7 @@ input:focus:focus-visible:focus-within:active {
 .feedback-container > a {
     color: var(--clr-white);
     cursor: pointer;
-}
+} */
 
 /* ====================================================================
 
@@ -415,39 +441,61 @@ input:focus:focus-visible:focus-within:active {
 .left-wrapper {
     flex: 1;
     color: var(--clr-primary);
-    padding-left: 70px;
+    padding-left: 75px;
 }
 
 .left-wrapper h1 {
     font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-500);
 }
 
 .right-wrapper {
     display: flex;
     min-width: 300px;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    padding-right: 50px;
 }
 
 .right-wrapper button:first-of-type {
-    color: var(--clr-primary);
-    font-size: var(--font-size-rg);
-    font-weight: var(--font-weight-500);
     background-color: var(--clr-white);
-    padding: 8px 30px;
-    border: 1px solid var(--clr-primary);
+    padding: 6px 25px;
+    border: 2px solid var(--clr-primary);
     border-radius: 6px;
 }
 
+.right-wrapper button:first-of-type:hover {
+    border: 2px solid var(--clr-accent);
+    color: var(--clr-accent);
+}
+
+.right-wrapper button:first-of-type:hover > .appoint-but {
+    color: var(--clr-accent);
+}
+
+.appoint-but {
+    color: var(--clr-primary);
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-500);
+}
+
 .right-wrapper button:nth-of-type(2) {
+    background-color: var(--clr-primary);
+    padding: 6px 10px;
+    border: 1px solid var(--clr-primary);
+    border-radius: 5px;
+}
+
+.right-wrapper button:nth-of-type(2):hover {
+    opacity: 0.7;
+}
+
+.log-in-but {
     color: var(--clr-white);
     font-size: var(--font-size-rg);
     font-weight: var(--font-weight-500);
-    background-color: var(--clr-primary);
-    padding: 8px 20px;
-    border: 1px solid var(--clr-primary);
-    border-radius: 6px;
 }
+
 
 /* =================================================================
                         Register Section
@@ -471,26 +519,34 @@ input:focus:focus-visible:focus-within:active {
     min-height: 400px;
 }
 
-.register-wrapper h3 {
+.register-wrapper > h3 {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-500);
     margin-bottom: 20px;
 }
 
-.register-wrapper p {
+.register-wrapper > p {
     font-size: var(--font-size-sm);
     line-height: 1.6;
 }
 
-.register-wrapper button {
-    font-size: var(--font-size-rg);
-    font-weight: var(--font-weight-500);
-    color: var(--clr-white);
+.register-wrapper > button {
     background-color: var(--clr-primary);
-    padding: 8px 55px;
+    padding: 8px 45px;
     border: none;
     border-radius: 6px;
     margin-top: 25px;
+}
+
+.register-wrapper > button:hover {
+    opacity: 0.7;
+}
+
+.register-wrapper > button > a {
+    font-size: var(--font-size-rg);
+    font-weight: var(--font-weight-500);
+    color: var(--clr-white);
+
 }
 
 .image-wrapper {
@@ -640,8 +696,12 @@ input:focus:focus-visible:focus-within:active {
     min-height: 500px;
 }
 
-.footer-container a {
+.socials-wrapper > div > a {
     color: var(--clr-white);
+}
+
+.socials-wrapper > div > a:hover {
+    color: var(--clr-accent);
 }
 
 .socials-wrapper {
@@ -651,21 +711,29 @@ input:focus:focus-visible:focus-within:active {
     gap: 50px;
 }
 
-.twitter-div,
-.facebook-div,
-.instagram-div,
-.linkedin-div {
+.twitter-div > a,
+.facebook-div > a,
+.instagram-div > a,
+.linkedin-div  > a {
     display: flex;
     gap: 15px;
 }
 
-.navi-links-wrapper {
+.navi-links-wrapper{
     margin-left: auto;
-    color: var(--clr-accent);
+}
+
+.navi-links-wrapper > a {
+    display: flex;
+    flex-direction: column;
+    color: var(--clr-white);
     letter-spacing: 1.8px;
 }
 
-.navi-links-wrapper a + a{
+.navi-links-wrapper > a:hover {
+    color: var(--clr-accent);
+}
+    .navi-links-wrapper a + a{
     margin-top: 30px;
 }
 
@@ -687,7 +755,7 @@ input:focus:focus-visible:focus-within:active {
     margin-bottom: 60px;
 }
 
-.contact-us-image-container img {
+.image-wrap > img {
     object-fit: cover;
     object-position: 0 -250px;
     width: 100%;
@@ -701,7 +769,7 @@ input:focus:focus-visible:focus-within:active {
     height: 500px;
 }
 
-.image-wrapper h1 {
+.image-wrapper > h1 {
     position: absolute;
     inset: 80% 0 0 50%;
     transform: translateX(-20%);
@@ -731,7 +799,7 @@ input:focus:focus-visible:focus-within:active {
     margin-top: 15px;
 }
 
-.numbers-wrapper li p {
+.contact-list > p {
     color: var(--clr-secondary);
     font-size: var(--font-size-md);
     margin-top: 10px;
@@ -755,9 +823,94 @@ input:focus:focus-visible:focus-within:active {
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+                        Appointment Page
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-block: 50px;
+}
+
+.form-container > h1 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 25px;
+    color: var(--clr-secondary);
+}
+
+.form-container > form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.form-container > form > div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.form-container > form > div > label{
+    font-size: var(--font-size-rg);
+}
+
+.form-container > form > div > label:hover + input{
+    border: 3px solid var(--clr-primary);
+}
+
+.form-container > form > div > input{
+    border: 2px solid var(--clr-accent);
+    border-radius: 5px;
+    padding: 6px;
+    margin-left: auto;
+}
+
+.form-container > form > div > input{
+    border: 2px solid var(--clr-accent);
+}
+
+.form-container > form > div > input:hover{
+    border: 2px solid var(--clr-secondary);
+}
+
+.visit-p {
+    padding-block: 20px;
+}
+
+textarea {
+    border-radius: 4px;
+}
+
+.form-container > form > button {
+    padding: 10px;
+    background-color: var(--clr-primary);
+    border: 2px solid var(--clr-grey);
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.form-container > form > button:hover {
+    opacity: 0.8;
+}
+
+.form-container > form > button > a {
+    font-size: var(--font-size-rg);
+    color: var(--clr-white);
+}
+
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
                                 404 PAGE
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
 
 .four-o-four-container {
     display: flex;
@@ -781,7 +934,7 @@ input:focus:focus-visible:focus-within:active {
     object-fit: cover;
 }
 
-.four-content h1 {
+.four-content > h1 {
     font-size: var(--font-size-sp);
     font-weight: var(--font-weight-700);
     color: rgb(121, 121, 121);
@@ -793,14 +946,17 @@ input:focus:focus-visible:focus-within:active {
 }
 
 .four-content p {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-rg);
     color: var(--clr-secondary);
     margin-bottom: 10px;
 }
 
-.four-content a {
+.four-content > p > a {
     display: inline-block;
     font-size: var(--font-size-rg);
     color: var(--clr-accent);
 }
 
+.four-content > p > a:hover {
+    text-decoration: underline;
+}
